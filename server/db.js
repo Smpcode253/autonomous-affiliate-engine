@@ -1,9 +1,7 @@
-import pkg from "pg";
-const { Pool } = pkg;
-
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
-});
-
-export default pool;
+// Placeholder for database initialization (e.g., PG, Mongoose, etc.)
+export const db = {
+  query: async (text, params) => {
+    console.log(`Executing query: ${text}`);
+    return [];
+  }
+};
