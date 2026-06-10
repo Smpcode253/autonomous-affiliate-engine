@@ -1,17 +1,15 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import router from "./src/routes.js";
-
-dotenv.config();
+import express from 'express';
+import { router } from './routes.js';
 
 const app = express();
-app.use(cors());
+// Railway automatically provides a PORT environment variable. Fallback to 8080 for safety.
+const PORT = process.env.PORT || 8080;
+
 app.use(express.json());
 
-app.use("/api", router);
+// Main router
+app.use('/', router);
 
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running natively on port ${PORT}`);
 });
