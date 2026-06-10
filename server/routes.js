@@ -1,10 +1,9 @@
-import express from "express";
-import { test, ingest, campaign } from "./controller.js";
+import express from 'express';
+import { getItems } from './controller.js';
 
 const router = express.Router();
 
-router.get("/test", test);
-router.post("/ingest", ingest);
-router.post("/campaign", campaign);
+// Define your endpoints here
+router.get('/api/items', getItems);
 
-export default router;
+export { router };
