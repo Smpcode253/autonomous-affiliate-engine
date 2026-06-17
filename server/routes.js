@@ -1,9 +1,16 @@
-import express from 'express';
-import { getItems } from './controller.js';
+const { Router } = require("express");
+const {
+  healthCheck,
+  ingestProductController,
+  generateCampaignController,
+  listProductsController
+} = require("./controller.js");
 
-const router = express.Router();
+const router = Router();
 
-// Define your endpoints here
-router.get('/api/items', getItems);
+router.get("/test", healthCheck);
+router.post("/ingest", ingestProductController);
+router.post("/campaign", generateCampaignController);
+router.get("/products", listProductsController);
 
-export { router };
+module.exports = router;
