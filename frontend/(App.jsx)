@@ -1,0 +1,29 @@
+import React, { useState, useEffect } from 'react';
+import { systemService } from './core/api';
+import DashboardLayout from './layouts/DashboardLayout';
+import HealthPulse from './features/system/HealthPulse';
+import ProductMatrix from './features/ingestion/ProductMatrix';
+import CampaignEngine from './features/campaigns/CampaignEngine';
+
+export default function App() {
+  const [activeModule, setActiveModule] = useState('ingest');
+  const [systemStatus, setSystemStatus] = useState('connecting');
+
+  // Verify backend handshake on mount
+  useEffect(() => {
+    systemService.testConnection()
+      .then(() => setSystemStatus('online'))
+      .catch(() => setSystemStatus('offline'));
+  }, []);
+
+  return (
+    <DashboardLayout status={systemStatus} setModule={setActiveModule}>
+      {/* Dynamic Module Routing */}
+      {activeModule === 'ingest' && <ProductMatrix />}
+      {activeModule === 'campaign' && <CampaignEngine />}
+      
+      {/* Persistent System Diagnostics */}
+      <HealthPulse status={systemStatus} />
+    </DashboardLayout>
+  );
+}
